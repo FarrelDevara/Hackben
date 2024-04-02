@@ -7,13 +7,13 @@
 Silahkan setup project aplikasi kamu:
 
 - [ x ] Pilih tema sesuai kesepakatan bersama  instructor, tuliskan dalam README github kamu
-- [ ] Membuat layout aplikasi sesuai tema yang dipilih
+- [ x ] Membuat layout aplikasi sesuai tema yang dipilih
 - [ ] Membuat initial data/seeder sesuai struktur data yang ditentukan (Kalian bisa check `db.json` sebagai referensi atau bisa digunakan sebagai data awal)
-  - [ ] Halaman auth
-    - [ ] Register
-    - [ ] Login
-  - [ ] Halaman home
-    - [ ] Komponen Banner
+  - [ x ] Halaman auth
+    - [ x ] Register
+    - [ x ] Login
+  - [ x ] Halaman home
+    - [ x ] Komponen Banner
     - [ ] Komponen Detail info Ecommerce
     - [ ] Komponen Featured Product (50-10 product) + “see-all”
   - [ ] Halaman product
@@ -31,12 +31,12 @@ Silahkan setup project aplikasi kamu:
 
 ### NEXT.js Intro
 
-- [ ] Setup NEXT.js project yang menggunakan typescript
-- [ ] Convert halaman-halaman dan komponen-komponen yang dibuat sebelumnya menjadi  pages dan components pada NEXT.js:
-  - [ ] Halaman register: /register
-  - [ ] Halaman login: /login
-  - [ ] Halaman home: /
-    - [ ] Komponen Banner
+- [ x ] Setup NEXT.js project yang menggunakan typescript
+- [ x ] Convert halaman-halaman dan komponen-komponen yang dibuat sebelumnya menjadi  pages dan components pada NEXT.js:
+  - [ x ] Halaman register: /register
+  - [ x ] Halaman login: /login
+  - [ x ] Halaman home: /
+    - [ x ] Komponen Banner
     - [ ] Komponen Detail info Ecommerce
     - [ ] Komponen Featured Product (5-10 product) + “see-all”
   - [ ] Halaman product: /products
