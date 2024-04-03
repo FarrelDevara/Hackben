@@ -25,4 +25,5 @@ export default class User {
         return await this.userCollection().insertOne(data)
     }
 
+    
 }

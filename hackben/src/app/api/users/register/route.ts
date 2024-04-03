@@ -2,7 +2,6 @@ import User from '@/db/models/users';
 
 export async function POST(request: Request) {
    try {
-    // console.log("masuk");
 
     const body = await request.json();
 
