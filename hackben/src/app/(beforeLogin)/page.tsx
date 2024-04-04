@@ -1,8 +1,18 @@
 import Image from 'next/image';
 
+async function fetchData(){
+  try {
+    // const data = await fetch()
 
-export default function Home() {
+    // return data
+  } catch (error) {
+    
+  }
+}
 
+export default async function Home() {
+
+  const data = await fetchData()
   return (
     <>
   
@@ -104,7 +114,7 @@ export default function Home() {
         </div>
       </div>
 
-      
+
       <div className="flex-1 items-center justify-center">
         <div className="mb-5 mt-5">
           <h1 className="text-center text-red-500 font-bold text-xl ">RECOMMENDATION</h1>
@@ -134,9 +144,28 @@ export default function Home() {
             </div>
           </div>
         </div>
-       
-        
       </div>
+      {/* company profile */}
+      <div className="">
+  <section className="py-8 w-full mx-auto">
+    <h2 className="text-center text-2xl font-bold mb-4 bg-yellow-400 text-white w-full">Our Profile</h2>
+    <div className="flex md:grid-cols-2 gap-8 w-full px-20">
+      <div className='flex-1'>
+        <h3 className="text-xl font-semibold mb-2 text-center text-red-500">Vision</h3>
+        <p className="text-gray-700">
+          To be the leading provider of Premier Japanese Casual Food with organization to inspire people to do their best
+        </p>
+      </div>
+      <div className='flex-1'>
+        <h3 className="text-xl font-semibold mb-2 text-center text-red-500">Mission</h3>
+        <p className="text-gray-700">
+          We make top-notch quality and service a high priority in providing integrity food to customers. We strive to create better ways to add value for stakeholders through innovation and technology. We commit to our people by providing opportunities to grow and excel.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
     </>
   );
 }
