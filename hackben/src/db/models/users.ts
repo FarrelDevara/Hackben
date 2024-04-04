@@ -1,12 +1,13 @@
 import { ObjectId } from "mongodb"
 import { db } from "../config"
+import { hashPassword } from "../helpers/bcrypt"
 
 type UserType = {
     _id: ObjectId
-    name: String
-    username : String
-    email: String
-    password: String
+    name: string
+    username : string
+    email: string
+    password: string
 }
 
 type UserInputType = Omit<UserType, "_id">
@@ -22,7 +23,10 @@ export default class User {
     }
 
     static async createOne(data: UserInputType){
-        return await this.userCollection().insertOne(data)
+        return await this.userCollection().insertOne({
+            ...data,
+            password: hashPassword(data.password)
+        })
     }
 
     

@@ -2,11 +2,11 @@ import Image from 'next/image';
 
 export default function Register() {
   return (
-    <main>
+<>
       {/* component */}
-      <div className="bg-gray-100 flex justify-center items-center h-screen">
+      <div className="bg-white flex justify-center items-center h-screen w-full">
         {/* Right: Login Form */}
-        <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 ">
+        <div className="lg:p-36 md:p-52 sm:20 p-8 w-full h-full lg:w-1/2 flex-col flex justify-center">
           <h1 className="text-2xl font-bold mb-4 text-red-600">Register</h1>
           <h2 className="font-bold mb-4">Personal Data</h2>
           <form
@@ -80,6 +80,6 @@ export default function Register() {
           </div>
         </div>
       </div>
-    </main>
+      </>
   );
 }

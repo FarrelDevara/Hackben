@@ -10,7 +10,6 @@ export async function POST(request: Request) {
     return Response.json({ message: 'Register Successfully' });
    } catch (error) {
     console.log(error);
-
    }
 }
 

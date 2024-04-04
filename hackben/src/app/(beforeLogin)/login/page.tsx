@@ -4,12 +4,12 @@ export default function Login() {
   return (
     <>
       {/* component */}
-      <div className="bg-white flex justify-center items-center h-screen" data-theme="light">
+      <div className="bg-white flex justify-center items-center h-screen w-full" data-theme="light">
         {/* Right: Login Form */}
-        <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+        <div className="lg:p-36 md:p-52 sm:20 p-8 w-full h-full lg:w-1/2 flex-col flex justify-center ">
           <h1 className="text-2xl font-semibold mb-4 text-red-500">Login</h1>
           <form
-            action="#"
+            action="#"  
             method="POST"
           >
             {/* Username Input */}
