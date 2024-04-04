@@ -36,7 +36,7 @@ Silahkan setup project aplikasi kamu:
   - [ x ] Halaman register: /register
   - [ x ] Halaman login: /login
   - [ x ] Halaman home: /
-    - [ x ] Komponen Banner
+    - [ ] Komponen Banner
     - [ ] Komponen Detail info Ecommerce
     - [ ] Komponen Featured Product (5-10 product) + “see-all”
   - [ ] Halaman product: /products
@@ -76,7 +76,7 @@ Implementasikan CSR dan SSR pada pada halaman-halaman dan komponen-komponen yang
 
 ### NEXT.js Route Handler
 
-- [ ] Install MongoDB database pada komputer kamu atau menggunakan MongoDB Atlas
+- [ x ] Install MongoDB database pada komputer kamu atau menggunakan MongoDB Atlas
 - [ ] Lakukan wiring dan validasi terhadap halaman-halaman dan komponen-komponen yang sudah dibuat.
   - [ ] Halaman register: /register
     - [ ] username:string (validation: required, unique)
