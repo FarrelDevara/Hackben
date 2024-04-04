@@ -9,7 +9,7 @@ export default function Product() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('http://localhost:3000/api/products');
+        const response = await fetch('http://localhost:3000/api/products', { cache: 'no-store' });
         const data = await response.json();
 
         // console.log(data);
