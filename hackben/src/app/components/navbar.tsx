@@ -1,13 +1,14 @@
+import Link from 'next/link';
 import { FaCartShopping } from 'react-icons/fa6';
 import { IoPerson } from 'react-icons/io5';
 export default function Navbar() {
   return (
     <>
-      <nav style={{ backgroundImage: 'url("/bg-navbar.png")' }}>
+      <nav style={{ backgroundImage: 'url("/bg-navbar.png")' }} className='py-1'>
         {/* bg from bg-navbar.png */}
         <div className="flex justify-end">
           <div className="flex mr-5 text-white items-center">
-          <p className='mr-2'>Login</p>
+          <Link href={"/login"} className='mr-2'>Login</Link>
           <IoPerson className="text-white" />
           </div>
         </div>
@@ -28,14 +29,14 @@ export default function Navbar() {
             />
           </div>
           <div className="flex-1 ml-5 ">
-            <a href="/">Home</a>
-            <a
-              href="/"
+            <Link href={"/"}>Home</Link>
+            <Link
+              href={"/products"}
               className="mr-4 ml-4"
             >
               Product
-            </a>
-            <a href="/">Wishlist</a>
+            </Link>
+            <Link href={"/wishlists"}>Wishlist</Link>
           </div>
 
           <div className="flex justify-end items-center">

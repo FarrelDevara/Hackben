@@ -5,17 +5,32 @@ import { z } from 'zod';
 type WishlistType = {
     _id: ObjectId;
     userId: ObjectId;
-    ProductId: ObjectId;
+    productId: ObjectId;
 };
 
+type InputWishlist = Omit<WishlistType, "_id">
 
 export default class Wishlist {
-    static wistlistCollection() {
+    static wishlistCollection() {
       return db.collection('wishlists');
     }
 
-    static async findAllById(id: string){
-        console.log("masook");
-        
+    static async createOne(body: InputWishlist){
+        const result = await this.wishlistCollection().insertOne({
+            productId: new ObjectId(body.productId),
+            userId: new ObjectId(body.userId)
+        })
+        return {
+            _id: result.insertedId,
+            ...body
+        }
+    }
+
+    static async findAllByUserId(id: string){
+        return(await this.wishlistCollection().find({userId: new ObjectId(id)}).toArray()) as WishlistType[]
+    }
+
+    static async deleteOne(id: string){
+        return(await this.wishlistCollection().deleteOne({_id : new ObjectId(id)}))
     }
 }
