@@ -1,9 +1,11 @@
-import jwt from 'jsonwebtoken'
+import jwt, {JwtPayload} from 'jsonwebtoken'
 import * as jose from 'jose'
 const SECRET = "wadidaw wadididaw"
 
-export const createToken = (payload: object) =>{
-    jwt.sign(payload, SECRET)
+export const createToken = (payload: JwtPayload) =>{
+    // console.log(payload, "<<<<<,payload");
+    
+    return jwt.sign(payload, SECRET)
 }
 
 export const readPayload = (token: string) => jwt.verify(token, SECRET);

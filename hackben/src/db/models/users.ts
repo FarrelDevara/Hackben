@@ -30,7 +30,7 @@ export default class User {
   }
 
   static async findOneByEmail(email: string){
-    return (await this.userCollection().findOne({email}))
+    return (await this.userCollection().findOne({email})) as UserType
   }
 
   static async createOne(data: UserInputType) {

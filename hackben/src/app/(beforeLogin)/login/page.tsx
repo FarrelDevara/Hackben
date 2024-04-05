@@ -1,6 +1,44 @@
 import Image from 'next/image';
+import { MyResponse } from '../register/page';
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 export default function Login() {
+  async function loginAction(formData: FormData){
+    'use server'
+
+    const rawFormData = {
+      email : formData.get('email'),
+      password : formData.get('password')
+    }
+
+    console.log(rawFormData, "<<<<<<<<<<<<<formdata");
+    
+    const response = await fetch('http://localhost:3000/api/users/login',{
+      cache: 'no-store',
+      method: 'POST',
+      headers:{
+      'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(rawFormData)
+    })
+    // console.log(response, "<<<<<<<<<<<<response");
+    
+    const result = await response.json() as MyResponse<{access_token: string}>
+    // console.log(result, "<result");
+    
+    if (!response.ok) {
+      redirect('/login?error' + result.error)
+    }
+
+    if (result.data) {
+      cookies().set('Authorization', 'Bearer ' + result.data.access_token)
+    }
+
+    return redirect('/')
+
+    // console.log(access_token);
+  }
   return (
     <>
       {/* component */}
@@ -9,21 +47,21 @@ export default function Login() {
         <div className="lg:p-36 md:p-52 sm:20 p-8 w-full h-full lg:w-1/2 flex-col flex justify-center ">
           <h1 className="text-2xl font-semibold mb-4 text-red-500">Login</h1>
           <form
-            action="#"  
+            action={loginAction} 
             method="POST"
           >
             {/* Username Input */}
             <div className="mb-4">
               <label
-                htmlFor="username"
+                htmlFor="email"
                 className="block text-black"
               >
-                Username
+                Email
               </label>
               <input
                 type="text"
-                id="username"
-                name="username"
+                id="email"
+                name="email"
                 className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-red-500"
                 autoComplete="off"
               />
