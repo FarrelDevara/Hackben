@@ -9,7 +9,7 @@ export default function LogoutButton(){
 
         cookies().get('Authorization') && cookies().delete('Authorization')
 
-        return redirect('/')
+        return redirect('/login')
     }
     return(
         <form action={LogoutAction}>

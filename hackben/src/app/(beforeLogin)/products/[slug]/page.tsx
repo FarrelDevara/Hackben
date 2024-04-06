@@ -1,8 +1,11 @@
+import AddWishlistButton from "@/app/components/addWishlist";
 import Card from "@/app/components/card";
 import { ProductType } from "@/db/models/products";
+import { ObjectId } from "mongodb";
 
 import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 type RequestParam = {
   params: { slug: string };
@@ -41,6 +44,7 @@ export default async function ProductDetail({
 }: {
   params: { slug: string };
 }) {
+
   const product: { data: ProductType } = await fetchData(params.slug);
 
   return (
@@ -64,17 +68,15 @@ export default async function ProductDetail({
 
           <div className="flex mt-2">
             <button className="border-red-600 border btn-block rounded-full px-2 py-2 w-20 mr-5">
-              <Link href={'/products'} className="text-red-500  hover:text-black font-bold text-sm">
+              <Link
+                href={"/products"}
+                className="text-red-500  hover:text-black font-bold text-sm"
+              >
                 Back
               </Link>
             </button>
-            <button
-              className="select-none  rounded-full bg-yellow-400 py-2 px-3 text-center align-middle font-sans font-semibold text-black"
-              type="button"
-              data-ripple-light="true"
-            >
-              + Order
-            </button>
+            <AddWishlistButton productId={product?.data._id}/>
+
           </div>
         </div>
       </div>

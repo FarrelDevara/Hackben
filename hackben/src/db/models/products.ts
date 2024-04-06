@@ -22,7 +22,12 @@ export default class Product {
     }
 
     static async findAll() {
-        return (await this.productCollection().find().toArray()) as ProductType[];
+        try {
+          return (await this.productCollection().find().toArray()) as ProductType[];
+        } catch (error) {
+          console.log(error);
+          
+        }
       }
 
       static async findBySlug(slug: string) {

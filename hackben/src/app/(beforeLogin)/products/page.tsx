@@ -6,15 +6,14 @@ import { useEffect, useState } from 'react';
 export default function Product(request: Request) {
   const [data, setData] = useState([]);
 
-  console.log(request.headers);
+  // console.log(request.headers, "<<<<<<<<<<<<");
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch('http://localhost:3000/api/products', { cache: 'no-store' });
         const data = await response.json();
-
-        // console.log(data);
+        // console.log(data,"<<<<<<<<<<<<<<<<<<<<<");
         setData(data.data);
       } catch (error) {
         console.log(error);
@@ -24,7 +23,7 @@ export default function Product(request: Request) {
     fetchData();
   }, []);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>

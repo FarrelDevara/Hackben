@@ -11,4 +11,4 @@ const client = new MongoClient(uri, {
   }
 });
 
-export const db = client.db("gc02p3")
+export const db = client.db("gc02")

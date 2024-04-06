@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
 //   console.log(request.nextUrl.pathname.startsWith("/api/wishlists"));
 
   if (request.nextUrl.pathname.startsWith("/api/wishlists")) {
-    console.log("masoookkk");
+    // console.log("masoookkk");
 
     const auth = cookies().get("Authorization")?.value;
 
@@ -38,7 +38,7 @@ export async function middleware(request: NextRequest) {
       token
     );
 
-    console.log(decoded);
+    // console.log(decoded);
     
 
     const newHeaders = new Headers(request.headers);
