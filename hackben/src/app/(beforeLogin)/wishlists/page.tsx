@@ -12,8 +12,7 @@ export default function Wishlist(request: Request) {
         ("use client");
         const response = await fetch(`http://localhost:3000/api/wishlists/`, {
           method: "GET",
-          cache: "no-store",
-          headers: {},
+          cache: "no-store"
         });
 
         if (!response.ok) {

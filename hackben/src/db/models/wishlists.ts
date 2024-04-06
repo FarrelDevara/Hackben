@@ -104,6 +104,8 @@ export default class Wishlist {
     }
 
     static async deleteOne(id: string){
+        console.log(new ObjectId(id));
+        
         return(await this.wishlistCollection().deleteOne({_id : new ObjectId(id)}))
     }
 }

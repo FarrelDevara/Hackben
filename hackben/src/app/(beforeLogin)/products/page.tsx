@@ -30,8 +30,8 @@ export default function Product(request: Request) {
       {/* <div className="text-center font-bold mt-10">Products</div> */}
       <h2 className="text-center text-2xl font-bold mb-4 bg-yellow-400 text-white w-full py-2 mt-10">MENU | メニュー</h2>
       <div className="grid grid-cols-4">
-        {data?.map((item) => (
-          <Card data={item} />
+        {data?.map((item, index) => (
+          <Card data={item} key={index} />
         ))}
       </div>
     </>

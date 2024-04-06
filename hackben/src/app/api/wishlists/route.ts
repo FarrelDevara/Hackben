@@ -45,3 +45,17 @@ export async function POST(request: Request) {
     // return NextResponse.json({ error });
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const body = await request.json();
+    console.log("masuk get wishlist", body);
+    
+    const userId = request.headers.get("x-user-id") as string
+    // console.log(userId);
+    
+    await Wishlist.deleteOne(body.productId);
+
+    return Response.json({ message: 'Wishlist Deleted' });
+  } catch (error) {}
+}
