@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
 export type MyResponse<T = {}> = {
   error? : string;
@@ -12,17 +13,34 @@ export default function Register() {
     // const password = formData.get('password')
 
     const rawFormData = {
+      name: formData.get('name'),
+      username: formData.get('username'),
       email : formData.get('email'),
       password : formData.get('password')
     }
 
-    const response = await fetch('http://localhost:3000/api/users/register',{
+    // console.log(rawFormData, "<<<<<<<<register");
+    
+    const response = await fetch(process.env.URL + '/api/users/register',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(rawFormData)
     })
+    const result = await response.json() as MyResponse<{access_token: string}>
+    // console.log(result);
+    
+    // console.log(response);
+    if (!response.ok) {
+      // console.log("gagal boskuu");
+      redirect('/register?error' + result.error)
+    }
+
+
+
+    return redirect('/login')
+    
   }
   return (
 <>
@@ -33,10 +51,10 @@ export default function Register() {
           <h1 className="text-2xl font-bold mb-4 text-red-600">Register</h1>
           <h2 className="font-bold mb-4">Personal Data</h2>
           <form
-            action="#"
+            action={registerAction}
             method="POST"
           >
-            {/* Username Input */}
+            {/* Name Input */}
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -48,6 +66,22 @@ export default function Register() {
                 type="text"
                 id="name"
                 name="name"
+                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-red-500"
+                autoComplete="off"
+              />
+            </div>
+             {/* Username Input */}
+             <div className="mb-4">
+              <label
+                htmlFor="username"
+                className="block text-gray-600"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
                 className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-red-500"
                 autoComplete="off"
               />

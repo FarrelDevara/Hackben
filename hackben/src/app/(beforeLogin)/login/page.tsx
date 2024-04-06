@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { MyResponse } from '../register/page';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
+import Link from 'next/link';
 
 export default function Login() {
   async function loginAction(formData: FormData){
@@ -12,9 +13,9 @@ export default function Login() {
       password : formData.get('password')
     }
 
-    console.log(rawFormData, "<<<<<<<<<<<<<formdata");
+    // console.log(rawFormData, "<<<<<<<<<<<<<formdata");
     
-    const response = await fetch('http://localhost:3000/api/users/login',{
+    const response = await fetch(process.env.URL + '/api/users/login',{
       cache: 'no-store',
       method: 'POST',
       headers:{
@@ -95,12 +96,11 @@ export default function Login() {
             <h1 className='mb-3'>Don't have an account?</h1>
             <h1 className='mb-3'>Become a HackBen Friend and get a special offer!</h1>
           </div>
-          <button
-              type="submit"
-              className="bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md py-2 px-4 w-full"
+          <Link href={'/register'}
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md py-2 px-4 w-full text-center"
             >
               Register
-            </button>
+            </Link>
         </div>
         {/* Left: Image */}
         <div className="w-1/2 h-screen hidden lg:block mt-20">

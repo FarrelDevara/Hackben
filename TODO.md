@@ -14,8 +14,8 @@ Silahkan setup project aplikasi kamu:
     - [ x ] Login
   - [ x ] Halaman home
     - [ x ] Komponen Banner
-    - [ ] Komponen Detail info Ecommerce
-    - [ ] Komponen Featured Product (50-10 product) + “see-all”
+    - [ x ] Komponen Detail info Ecommerce
+    - [ x ] Komponen Featured Product (50-10 product) + “see-all”
   - [ ] Halaman product
     - [ ] Komponen List Product
     - [ ] Komponen Search
@@ -36,15 +36,15 @@ Silahkan setup project aplikasi kamu:
   - [ x ] Halaman register: /register
   - [ x ] Halaman login: /login
   - [ x ] Halaman home: /
-    - [ ] Komponen Banner
-    - [ ] Komponen Detail info Ecommerce
-    - [ ] Komponen Featured Product (5-10 product) + “see-all”
-  - [ ] Halaman product: /products
-    - [ ] Komponen List Product
+    - [ x ] Komponen Banner
+    - [ x ] Komponen Detail info Ecommerce
+    - [ x ] Komponen Featured Product (5-10 product) + “see-all”
+  - [ x ] Halaman product: /products
+    - [x  ] Komponen List Product
     - [ ] Komponen Search
     - [ ] Komponent Pagination
     - [ ] Komponen Add to wishlist
-  - [ ] Halaman detail product: /products/:slug
+  - [ x ] Halaman detail product: /products/:slug
     - [ ] Komponen Add to wishlist
   - [ ] Halaman wishlist: /wishlist
     - [ ] Komponen List Wishlist (bisa menggunakan card yang sama dengan halaman list product)
@@ -59,12 +59,12 @@ Implementasikan CSR dan SSR pada pada halaman-halaman dan komponen-komponen yang
 - [ ] Halaman register: /register
 - [ ] Halaman login: /login
 - [ ] Halaman home: / (SSR)
-- [ ] Halaman product: /products (CSR)
+- [ x ] Halaman product: /products (CSR)
   - [ ] Komponen List Product (CSR)
   - [ ] Komponen Search (CSR)
   - [ ] Komponen Pagination (CSR)
   - [ ] Komponen Add to Wishlist (CSR)
-- [ ] Halaman detail product: /products/:slug (SSR)
+- [ x ] Halaman detail product: /products/:slug (SSR)
   - [ ] Komponen Add to Wishlist (CSR)
 - [ ] Halaman wishlist: /wishlist
   - [ ] Komponen List Wishlist (CSR)
@@ -86,7 +86,7 @@ Implementasikan CSR dan SSR pada pada halaman-halaman dan komponen-komponen yang
     - [ ] email:string  (validation: required, email format)
     - [ ] password:string  (validation: required)
   - [ ] Halaman home: / (SSR)
-    - [ ] Halaman product: /products
+    - [ x ] Halaman product: /products
     - [ ] Fitur List Product
     - [ ] Fitur Search
     - [ ] Fitur Pagination
@@ -94,7 +94,7 @@ Implementasikan CSR dan SSR pada pada halaman-halaman dan komponen-komponen yang
   - [ ] Fitur Add to Wishlist
     - [ ] userId: ObjectId  (validation: required)
     - [ ] productId: ObjectId  (validation: required)
-  - [ ] Halaman detail product: /products/:slug
+  - [ ]x  Halaman detail product: /products/:slug
     - [ ] Fitur Add to Wishlist
       - [ ] userId: ObjectId  (validation: required)
       - [ ] productId: ObjectId  (validation: required)

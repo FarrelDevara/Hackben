@@ -1,15 +1,23 @@
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { FaCartShopping } from 'react-icons/fa6';
 import { IoPerson } from 'react-icons/io5';
+import LogoutButton from './logoutButton';
 export default function Navbar() {
+
+  // console.log(cookies().get('Authorization'));
+  
   return (
     <>
       <nav style={{ backgroundImage: 'url("/bg-navbar.png")' }} className='py-1'>
         {/* bg from bg-navbar.png */}
         <div className="flex justify-end">
           <div className="flex mr-5 text-white items-center">
-          <Link href={"/login"} className='mr-2'>Login</Link>
+
+          {cookies().get('Authorization')  ? <LogoutButton/> : <Link href={"/login"} className='mr-2'>Login</Link>}
+          
           <IoPerson className="text-white" />
+
           </div>
         </div>
       </nav>

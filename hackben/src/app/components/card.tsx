@@ -1,9 +1,31 @@
 import { ProductType } from "@/db/models/products";
+import { ObjectId } from "mongodb";
 import Link from "next/link";
 
-export default function Card({data} : {data: ProductType}){
+export default function Card({data} : {data: ProductType}, ){
 
+    
+    
     // console.log(data);
+    async function addWishlist(_id: ObjectId){
+    
+      try {
+        const response = await fetch('/api/wishlists',{
+          method: "POST",
+          body : JSON.stringify({productId: _id})
+        })
+
+        if (!response.ok) {
+          throw await response.json
+        }
+        console.log("masuk");
+  
+      } catch (error) {
+        console.log(error);
+        
+      }
+      
+    }
     
     return(
         <div className="mt-10">
@@ -21,6 +43,7 @@ export default function Card({data} : {data: ProductType}){
             <div className="p-6 pt-0 flex justify-between text-red-500 ">
               <Link href={'/products/'+ data?.slug}>Details</Link>
               <button
+                onClick={()=>{addWishlist(data?._id)}}
                 className="select-none rounded-full bg-yellow-500 py-2 px-2 text-center align-middle font-sans text-xs font-bold text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button"
                 data-ripple-light="true"

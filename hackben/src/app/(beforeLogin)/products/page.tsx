@@ -3,8 +3,10 @@
 import Card from '@/app/components/card';
 import { useEffect, useState } from 'react';
 
-export default function Product() {
+export default function Product(request: Request) {
   const [data, setData] = useState([]);
+
+  console.log(request.headers);
 
   useEffect(() => {
     async function fetchData() {
@@ -26,9 +28,9 @@ export default function Product() {
 
   return (
     <>
-      <div className="text-center font-bold mt-10">Products</div>
-
-      <div className="mt-10 grid grid-cols-4">
+      {/* <div className="text-center font-bold mt-10">Products</div> */}
+      <h2 className="text-center text-2xl font-bold mb-4 bg-yellow-400 text-white w-full py-2 mt-10">MENU | メニュー</h2>
+      <div className="grid grid-cols-4">
         {data?.map((item) => (
           <Card data={item} />
         ))}
