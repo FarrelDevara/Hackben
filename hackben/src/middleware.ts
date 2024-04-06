@@ -38,9 +38,6 @@ export async function middleware(request: NextRequest) {
       token
     );
 
-    // console.log(decoded);
-    
-
     const newHeaders = new Headers(request.headers);
     newHeaders.set("x-user-id", decoded.id);
     newHeaders.set("x-user-email", decoded.email);
@@ -52,8 +49,19 @@ export async function middleware(request: NextRequest) {
       },
     });
   }
+
+  if (request.nextUrl.pathname.startsWith("/wishlists")) {
+
+    const auth = cookies().get("Authorization")?.value;
+
+    if (!auth) {
+      request.nextUrl.pathname = "/login"
+      return NextResponse.redirect(request.nextUrl)
+    }
+  }
 }
 
+//matching
 export const config = {
-  matcher: ["/api/wishlists/:path*"],
+  matcher: ["/api/wishlists/:path*", "/wislists/:path*"],
 };

@@ -5,11 +5,15 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
-    const body = await request.json();
+    // const body = await request.json();
+    // console.log("masuk get wishlist");
+    
+    const userId = request.headers.get("x-user-id") as string
+    // console.log(userId);
+    
+    const wishlist = await Wishlist.findAllByUserId(userId);
 
-    await Wishlist.findAllByUserId(body);
-
-    return Response.json({ message: "MASOOKK" });
+    return NextResponse.json({ data : wishlist});
   } catch (error) {}
 }
 

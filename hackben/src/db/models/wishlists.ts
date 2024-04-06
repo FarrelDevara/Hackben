@@ -2,11 +2,36 @@ import { ObjectId } from 'mongodb';
 import { db } from '../config';
 import { z } from 'zod';
 
-type WishlistType = {
+interface WishlistType {
     _id: ObjectId;
     userId: ObjectId;
     productId: ObjectId;
+    createdAt: Date;
+    updatedAt: Date;
 };
+
+interface Product {
+    _id: ObjectId;
+    name: string;
+    slug: string;
+    description: string;
+    excerpt: string;
+    price: number;
+    tags: string[];
+    thumbnail: string;
+    images: string[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export type ShowWishList = {
+    _id: ObjectId;
+    userId: ObjectId;
+    productId: ObjectId;
+    createdAt: Date;
+    updatedAt: Date;
+    productDetails: Product;
+}
 
 type InputWishlist = Omit<WishlistType, "_id">
 
@@ -46,7 +71,7 @@ export default class Wishlist {
 
     static async findAllByUserId(id: string){
         const userId = new ObjectId(id)
-        const data = await db.collection('Wishlist').aggregate([
+        const data = await db.collection('wishlists').aggregate([
             {
                 $match: {
                     userId
@@ -70,21 +95,12 @@ export default class Wishlist {
                     productId: 1,
                     createdAt: 1,
                     updatedAt: 1,
-                    "productDetails.name": 1,
-                    "productDetails.slug": 1,
-                    "productDetails.description": 1,
-                    "productDetails.excerpt": 1,
-                    "productDetails.price": 1,
-                    "productDetails.tags": 1,
-                    "productDetails.thumbnail": 1,
-                    "productDetails.images": 1,
-                    "productDetails.createdAt": 1,
-                    "productDetails.updatedAt": 1,
+                    productDetails: 1
                 }
             }
         ]).toArray();
 
-        return data
+        return data as ShowWishList[]
     }
 
     static async deleteOne(id: string){
