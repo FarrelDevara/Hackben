@@ -5,8 +5,26 @@ import { useEffect, useState } from "react";
 
 export default function Product(request: Request) {
   const [data, setData] = useState([]);
-
+  const [search, setSearch] = useState("");
+  console.log(search);
+  let query = search.replaceAll(" ", "%20");
   // console.log(request.headers, "<<<<<<<<<<<<");
+  async function SearchData(query: string) {
+    let response = await fetch(
+      `http://localhost:3000/api/products?search=` + query,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+    setData((await response.json()).data);
+  }
+  
+  useEffect(() => {
+    if (search) {
+      SearchData(search);
+    }
+  }, [search]);
 
   useEffect(() => {
     async function fetchData() {
@@ -40,7 +58,14 @@ export default function Product(request: Request) {
 
       <div className="flex justify-end mr-1">
         <label className="input input-bordered gap-2 flex-row flex items-center">
-          <input type="text" className="" placeholder="Search" />
+          <input
+            type="text"
+            className=""
+            placeholder="Search"
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
