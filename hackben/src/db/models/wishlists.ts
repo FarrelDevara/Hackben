@@ -52,7 +52,7 @@ export default class Wishlist {
     }
 
     static async createOne(body: InputWishlist){
-        console.log("masookkk");
+        // console.log("masookkk");
         
         console.log(body, "<<<<<<< body");
         

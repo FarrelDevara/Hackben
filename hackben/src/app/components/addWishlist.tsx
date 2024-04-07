@@ -15,7 +15,7 @@ const AddWishlistButton: React.FC<{ productId: object }> = ({ productId }) => {
         },
       });
 
-      // console.log(response, "response <<<<<<<<<<<<<<<<<<<<<<<");
+      console.log(response, "response <<<<<<<<<<<<<<<<<<<<<<<");
 
       if (!response.ok) {
         const error = await response.json();
@@ -31,10 +31,10 @@ const AddWishlistButton: React.FC<{ productId: object }> = ({ productId }) => {
       });
       // console.log('masuk');
     } catch (error) {
-      // console.log(error, "error");
+      console.log(error, "error");
       Swal.fire({
         title: error === 'Invalid Token' ? "Login terlebih Dahulu" : "Error",
-        text: typeof error === 'string' ? error : "Internal Server Error",
+        text: typeof error === 'string' ? error : "Cant Wishlist Same Item",
         icon: 'error',
       });
     }

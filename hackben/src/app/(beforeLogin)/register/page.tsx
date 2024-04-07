@@ -1,5 +1,8 @@
+"use client"
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 export type MyResponse<T = {}> = {
   error? : string;
@@ -7,9 +10,11 @@ export type MyResponse<T = {}> = {
 }
 
 export default function Register() {
+  const router = useRouter()
+
   const registerAction = async (formData: FormData) =>{
-    'use server'
-    // const email = formData.get('email')
+    try {
+      // const email = formData.get('email')
     // const password = formData.get('password')
 
     const rawFormData = {
@@ -21,7 +26,7 @@ export default function Register() {
 
     // console.log(rawFormData, "<<<<<<<<register");
     
-    const response = await fetch(process.env.URL + '/api/users/register',{
+    const response = await fetch('/api/users/register',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -29,17 +34,32 @@ export default function Register() {
       body: JSON.stringify(rawFormData)
     })
     const result = await response.json() as MyResponse<{access_token: string}>
-    // console.log(result);
+    console.log(result);
     
     // console.log(response);
     if (!response.ok) {
-      // console.log("gagal boskuu");
-      redirect('/register?error' + result.error)
+      console.log(result);
+      
+      throw result.error
     }
 
+    Swal.fire({
+      title: "Success!",
+      text: "Register Success",
+      icon: "success"
+    });
 
+    return router.push('/wishlists')
 
-    return redirect('/login')
+    } catch (error) {
+      console.log(error);
+      
+      Swal.fire({
+        title: "Error!",
+        text: typeof error === "string" ? error : "Internal Server Error",
+        icon: "error"
+      });
+    }
     
   }
   return (
@@ -50,6 +70,7 @@ export default function Register() {
         <div className="lg:p-36 md:p-52 sm:20 p-8 w-full h-full lg:w-1/2 flex-col flex justify-center">
           <h1 className="text-2xl font-bold mb-4 text-red-600">Register</h1>
           <h2 className="font-bold mb-4">Personal Data</h2>
+
           <form
             action={registerAction}
             method="POST"

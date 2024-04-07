@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.29.0",
     "alpinejs": "^3.13.8",
     "bcryptjs": "^2.4.3",
     "jose": "^5.2.3",

@@ -59,9 +59,31 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(request.nextUrl)
     }
   }
+
+  if (request.nextUrl.pathname.startsWith("/login")) {
+    // console.log("masoookkk");
+
+    const auth = cookies().get("Authorization")?.value;
+    if (auth) {
+      request.nextUrl.pathname = "/"
+      return NextResponse.redirect(request.nextUrl)
+    }
+
+  }
+
+  if (request.nextUrl.pathname.startsWith("/register")) {
+    // console.log("masoookkk");
+
+    const auth = cookies().get("Authorization")?.value;
+    if (auth) {
+      request.nextUrl.pathname = "/"
+      return NextResponse.redirect(request.nextUrl)
+    }
+  }
+    
 }
 
 //matching
 export const config = {
-  matcher: ["/api/wishlists/:path*", "/wishlists/:path*"],
+  matcher: ["/api/wishlists/:path*", "/wishlists/:path*", "/login/:path*", "/register/:path"],
 };

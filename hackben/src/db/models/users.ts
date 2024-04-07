@@ -33,6 +33,11 @@ export default class User {
     return (await this.userCollection().findOne({email})) as UserType
   }
 
+  static async findOneById(_id: ObjectId){
+    // const userId = new ObjectId(_id)
+    return (await this.userCollection().findOne({_id})) as UserType
+  }
+
   static async createOne(data: UserInputType) {
     try {
       const parsedData = userSchema.safeParse(data);

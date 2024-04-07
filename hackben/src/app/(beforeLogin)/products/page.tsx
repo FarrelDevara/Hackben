@@ -1,49 +1,46 @@
 "use client";
 
 import Card from "@/app/components/card";
+import { ProductType } from "@/db/models/products";
 import { useEffect, useState } from "react";
 
 export default function Product(request: Request) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<ProductType[]>([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState("");
-  console.log(search);
-  let query = search.replaceAll(" ", "%20");
-  // console.log(request.headers, "<<<<<<<<<<<<");
-  async function SearchData(query: string) {
-    let response = await fetch(
-      `http://localhost:3000/api/products?search=` + query,
-      {
-        method: "GET",
-        cache: "no-store",
-      }
-    );
-    setData((await response.json()).data);
+
+  async function fetchData(pageNumber: number) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/products?page=${pageNumber}&search=${search}`);
+      const newData = await response.json();
+      setData(data.concat(newData.data));
+      setHasMore(newData.data.length > 0);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }
-  
-  useEffect(() => {
-    if (search) {
-      SearchData(search);
+
+  // Function to handle infinite scroll
+  function handleScroll() {
+    if (!loading && hasMore && window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+      setLoading(true);
+      setPage(page + 1);
     }
-  }, [search]);
+  }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch("http://localhost:3000/api/products", {
-          cache: "no-store",
-        });
-        const data = await response.json();
-        // console.log(data,"<<<<<<<<<<<<<<<<<<<<<");
-        setData(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    fetchData(page); 
+  }, [page, search]);
 
-    fetchData();
-  }, []);
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [loading, hasMore]);
 
-  // console.log(data);
+  console.log(data);
 
   return (
     <>
