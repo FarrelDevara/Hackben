@@ -1,6 +1,7 @@
 import User from "@/db/models/users";
 import Wishlist from "@/db/models/wishlists";
 import { ObjectId } from "mongodb";
+import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -10,6 +11,9 @@ export async function GET(request: Request) {
     
     const userId = request.headers.get("x-user-id") as string
     // console.log(userId);
+    if (!userId) {
+      return NextResponse.redirect('/login')
+    }
     
     const wishlist = await Wishlist.findAllByUserId(userId);
 
@@ -22,7 +26,7 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     const userId = request.headers.get("x-user-id");
-    console.log(userId, " userId dari header");
+    // console.log(userId, " userId dari header");
 
     body.userId = userId;
     // console.log(body, "<<<body di post");
@@ -49,7 +53,7 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   try {
     const body = await request.json();
-    console.log("masuk get wishlist", body);
+    // console.log("masuk get wishlist", body);
     
     const userId = request.headers.get("x-user-id") as string
     // console.log(userId);

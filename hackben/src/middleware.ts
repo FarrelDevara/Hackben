@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { readPayloadJose } from "./db/helpers/jwt";
 
 export async function middleware(request: NextRequest) {
-//   console.log(request.nextUrl.pathname.startsWith("/api/wishlists"));
+  // console.log(request.nextUrl.pathname);
 
   if (request.nextUrl.pathname.startsWith("/api/wishlists")) {
     // console.log("masoookkk");
@@ -51,7 +51,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.startsWith("/wishlists")) {
-
+    
     const auth = cookies().get("Authorization")?.value;
 
     if (!auth) {
@@ -63,5 +63,5 @@ export async function middleware(request: NextRequest) {
 
 //matching
 export const config = {
-  matcher: ["/api/wishlists/:path*", "/wislists/:path*"],
+  matcher: ["/api/wishlists/:path*", "/wishlists/:path*"],
 };

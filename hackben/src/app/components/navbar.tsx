@@ -44,7 +44,7 @@ export default function Navbar() {
             >
               Product
             </Link>
-            <Link href={"/wishlists"}>Wishlist</Link>
+            {cookies().get("Authorization") ? <Link href={"/wishlists"}>Wishlist</Link> : ""}
           </div>
 
           <div className="flex justify-end items-center">

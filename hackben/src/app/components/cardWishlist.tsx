@@ -1,20 +1,18 @@
 'use client'
 
-import Link from "next/link";
 import Swal from "sweetalert2";
 import { ShowWishList } from "@/db/models/wishlists";
 import { ObjectId } from "mongodb";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation';
 import { revalidatePath } from "next/cache";
 
 
 export default function CardWishlist({ data }: { data: ShowWishList }) {
   // console.log(data, "<<<di card");
-  // const router = useRouter();
+  const router = useRouter();
 
   async function deleteWishlist(_id: ObjectId){
     // console.log("masuk");
-    
     try {
       const response = await fetch('/api/wishlists',{
         method: "DELETE",
@@ -33,8 +31,8 @@ export default function CardWishlist({ data }: { data: ShowWishList }) {
         icon: "success"
       });
       
-      revalidatePath('/wishlists')
-      // router.push('/wishlists')
+      // revalidatePath('/wishlists')
+      router.push('/wishlists')
     } catch (error) {
       console.log(error);
       Swal.fire({

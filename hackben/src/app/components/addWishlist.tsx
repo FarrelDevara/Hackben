@@ -21,7 +21,7 @@ const AddWishlistButton: React.FC<{ productId: object }> = ({ productId }) => {
         const error = await response.json();
         // console.log(error, " di response");
         
-        throw error.error
+        throw error.error || error.errMessage
       }
 
       Swal.fire({
@@ -31,9 +31,9 @@ const AddWishlistButton: React.FC<{ productId: object }> = ({ productId }) => {
       });
       // console.log('masuk');
     } catch (error) {
-      console.log(error, "error");
+      // console.log(error, "error");
       Swal.fire({
-        title: 'Error',
+        title: error === 'Invalid Token' ? "Login terlebih Dahulu" : "Error",
         text: typeof error === 'string' ? error : "Internal Server Error",
         icon: 'error',
       });

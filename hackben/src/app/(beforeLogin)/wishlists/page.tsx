@@ -1,6 +1,9 @@
 "use client";
 
 import CardWishlist from "@/app/components/cardWishlist";
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Wishlist(request: Request) {
@@ -9,26 +12,28 @@ export default function Wishlist(request: Request) {
   useEffect(() => {
     async function fetchData() {
       try {
-        ("use client");
         const response = await fetch(`http://localhost:3000/api/wishlists/`, {
           method: "GET",
           cache: "no-store"
         });
-
+        console.log(response);
+        
         if (!response.ok) {
-          throw "error"
+          return redirect('/login')
         }
 
         const data = await response.json();
         setWishlist(data.data);
       } catch (error) {
+        console.log(error);
+        
         console.error("Error fetching wishlist item:", error);
       }
     }
     fetchData();
   }, []);
 
-  console.log(wishlist);
+  // console.log(wishlist);
   
 
   return (
