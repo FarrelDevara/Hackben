@@ -29,7 +29,7 @@ export async function generateMetadata(
 
 async function fetchData(slug: string) {
   try {
-    const response = await fetch(`http://localhost:3000/api/products/${slug}`, {
+    const response = await fetch(process.env.URL + `/api/products/${slug}`, {
       cache: "no-store",
     });
     const data = await response.json();

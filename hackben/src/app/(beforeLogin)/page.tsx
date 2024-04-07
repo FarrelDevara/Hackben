@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 async function fetchData(){
   try {
-    const response = await fetch("http://localhost:3000/api/featuredProducts", {
+    const response = await fetch(process.env.URL + "/api/featuredProducts", {
       cache: "no-store",
     });
     const data = await response.json();

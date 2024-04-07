@@ -4,26 +4,29 @@ import Card from "@/app/components/card";
 import { ProductType } from "@/db/models/products";
 import { useEffect, useState } from "react";
 
-export default function Product(request: Request) {
+export default function Product() {
   const [data, setData] = useState<ProductType[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<string>("");
 
   async function fetchData(pageNumber: number) {
     try {
       if (search) {
         
-        const response = await fetch(`http://localhost:3000/api/products?search=${search}`, {
+        const response = await fetch(process.env.URL + `/api/products?search=${search}`, {
         cache: "no-store",
+        headers:{
+          'Content-Type' : 'application/json'
+          },
       });
       const newData = await response.json();
       setData([])
       setData(newData.data)
       }else{
         
-        const response = await fetch(`http://localhost:3000/api/products?page=${pageNumber}&search=${search}`, {
+        const response = await fetch(process.env.URL + `/api/products?page=${pageNumber}&search=${search}`, {
           cache: "no-store",
         });
         const newData = await response.json();
@@ -55,7 +58,7 @@ export default function Product(request: Request) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading, hasMore]);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>

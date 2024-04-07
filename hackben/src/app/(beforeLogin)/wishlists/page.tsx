@@ -6,15 +6,18 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Wishlist(request: Request) {
+export default function Wishlist() {
     const [wishlist, setWishlist] = useState([])
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:3000/api/wishlists/`, {
+        const response = await fetch(process.env.URL + `/api/wishlists/`, {
           method: "GET",
-          cache: "no-store"
+          cache: "no-store",
+          headers:{
+            'Content-Type' : 'application/json'
+            },
         });
         console.log(response);
         

@@ -93,7 +93,7 @@ export default function Login() {
           </form>
           {/* Sign up  Link */}
           <div className="mt-6 text-black text-center font-semibold">
-            <h1 className='mb-3'>Don't have an account?</h1>
+            <h1 className='mb-3'>Dont have an account?</h1>
             <h1 className='mb-3'>Become a HackBen Friend and get a special offer!</h1>
           </div>
           <Link href={'/register'}
