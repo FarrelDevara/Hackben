@@ -26,7 +26,6 @@ export async function GET(request: NextRequest) {
     if (search) {
       // console.log("masuk?");
       // console.log(search);
-
       data = await db
         .collection("products")
         .find({
@@ -36,10 +35,11 @@ export async function GET(request: NextRequest) {
           },
         })
         .toArray();
+        
       console.log(data);
     } else {
     //   console.log("masuk tanpa search");
-      data = await Product.findAndSortAll(page); // Adjust this call based on your implementation
+      data = await Product.findAndSortAll(page);
     }
 
     return NextResponse.json({ data });

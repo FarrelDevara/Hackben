@@ -4,8 +4,6 @@ import Swal from "sweetalert2";
 import { ShowWishList } from "@/db/models/wishlists";
 import { ObjectId } from "mongodb";
 import { useRouter } from 'next/navigation';
-import { revalidatePath } from "next/cache";
-
 
 export default function CardWishlist({ data }: { data: ShowWishList }) {
   // console.log(data, "<<<di card");
@@ -59,8 +57,6 @@ export default function CardWishlist({ data }: { data: ShowWishList }) {
           </h1>
         </div>
         <div className="p-6 pt-0 flex justify-end text-red-500 ">
-          {/* <Link href={"/products/" + data?.productDetails.slug}>Details</Link> */}
-          {/* <AddWishlistButton productId={data?.productId}/> */}
           <button
             onClick={()=>{deleteWishlist(data?._id)}}
             className="select-none rounded-full bg-red-500 py-2 px-2 text-center align-middle font-sans text-xs font-bold text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"

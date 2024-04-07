@@ -13,11 +13,26 @@ export default function Product(request: Request) {
 
   async function fetchData(pageNumber: number) {
     try {
-      const response = await fetch(`http://localhost:3000/api/products?page=${pageNumber}&search=${search}`);
+      if (search) {
+        
+        const response = await fetch(`http://localhost:3000/api/products?search=${search}`, {
+        cache: "no-store",
+      });
       const newData = await response.json();
-      setData(data.concat(newData.data));
-      setHasMore(newData.data.length > 0);
-      setLoading(false);
+      setData([])
+      setData(newData.data)
+      }else{
+        
+        const response = await fetch(`http://localhost:3000/api/products?page=${pageNumber}&search=${search}`, {
+          cache: "no-store",
+        });
+        const newData = await response.json();
+        
+        setData(data.concat(newData.data));
+        setHasMore(newData.data.length > 0);
+        setLoading(false);
+      }
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -25,7 +40,7 @@ export default function Product(request: Request) {
 
   // Function to handle infinite scroll
   function handleScroll() {
-    if (!loading && hasMore && window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+    if (!loading && hasMore && window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 100) {
       setLoading(true);
       setPage(page + 1);
     }

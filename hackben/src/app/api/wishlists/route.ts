@@ -32,35 +32,16 @@ export async function POST(request: Request) {
     // console.log(body, "<<<body di post");
 
     const findWishlist = await Wishlist.findAllByUserId(body.userId);
-    // const findUser = await User.findOneById(findWishlist.userId);
-    // if (findWishlist) {
-    //   throw "Can't wishlist the same item"
-    // }
 
     findWishlist.map((item)=>{
-      console.log(item.productId,new ObjectId(body.productId));
+      // console.log(item.productId,new ObjectId(body.productId));
       
-      console.log(item.productId.equals(new ObjectId(body.productId)));
+      // console.log(item.productId.equals(new ObjectId(body.productId)));
       
       if (item.productId.equals(new ObjectId(body.productId))) {
         throw "Can't wishlist the same item"
       }
     })
-    // // Check if findUser or findWishlist is not found
-    // if (!findUser || !findWishlist) {
-    //   throw new Error("User or wishlist not found");
-    // }
-
-    // // Convert userId to ObjectId for comparison
-    // const userIdObjectId = new ObjectId(body.userId.toString());
-
-    // console.log(findWishlist.userId,userIdObjectId);
-    
-    // console.log(findWishlist.userId.equals(userIdObjectId),"<compare");
-    
-    // if (findWishlist.userId.equals(userIdObjectId)) {
-    //   throw "Can't wishlist the same item"
-    // }
 
     await Wishlist.createOne(body);
 

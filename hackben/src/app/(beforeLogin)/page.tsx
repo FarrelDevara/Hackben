@@ -1,23 +1,30 @@
+import { ProductType } from '@/db/models/products';
 import Image from 'next/image';
+import Card from '../components/card';
+import Link from 'next/link';
 
 async function fetchData(){
   try {
-    // const data = await fetch()
-
-    // return data
+    const response = await fetch("http://localhost:3000/api/featuredProducts", {
+      cache: "no-store",
+    });
+    const data = await response.json();
+    return data;
   } catch (error) {
-    
+    console.log(error);
   }
 }
 
 export default async function Home() {
 
-  const data = await fetchData()
+  const product: { data: ProductType[] } = await fetchData();
+  
   return (
     <>
   
       {/* carousel */}
-      <div className="flex justify-center mt-5">
+      <div className='flex flex-col'>
+      <div className="flex justify-center mt-8">
         <div className="carousel w-2/3 h-1/6">
           <div
             id="slide1"
@@ -116,35 +123,20 @@ export default async function Home() {
 
 
       <div className="flex-1 items-center justify-center">
-        <div className="mb-5 mt-5">
+        <div className=" mt-5">
           <h1 className="text-center text-red-500 font-bold text-xl ">RECOMMENDATION</h1>
         </div>
-        {/* card */}
-        <div>
-          <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md ml-5">
-            <div className="relative mx-4 mt-6 h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
-              <img
-                src="https://hokben-images.s3.ap-southeast-3.amazonaws.com/menu/f0b9d580d9386a60506086a819fd1de4-1660019294911"
-                alt="img-blur-shadow"
-              />
-            </div>
-            <div className="p-6 text-center">
-              <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">Paket Hemat</h5>
-              <h1 className="text-red-500 font-bold">Rp. 25.000</h1>
-            </div>
-            <div className="p-6 pt-0 flex justify-between text-red-500 ">
-              <button>Details</button>
-              <button
-                className="select-none rounded-full bg-yellow-500 py-2 px-2 text-center align-middle font-sans text-xs font-bold text-black shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button"
-                data-ripple-light="true"
-              >
-                + Order
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
+      <div className="grid grid-cols-5">
+      {product?.data?.map((item,index)=>(
+            <Card data={item} key={index}/>
+        ))}
+      </div>
+
+      <div className="btn flex items-center justify-center mt-5 mx-52">
+        <Link href={'/products'} className=''>More Menus...</Link>
+      </div>
+      
       {/* company profile */}
       <div className="">
   <section className="py-8 w-full mx-auto">
@@ -165,7 +157,7 @@ export default async function Home() {
     </div>
   </section>
 </div>
-
+</div>
     </>
   );
 }

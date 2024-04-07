@@ -48,5 +48,10 @@ export default class Product {
     
       static async findBySlug(slug: string) {
         return (await this.productCollection().findOne({slug: slug}))
-      }  
+      }
+      
+      static async findFeaturedProducts() {
+        const find = await this.findAll()
+        return find?.slice(0, 5)    
+    }
 }

@@ -9,9 +9,9 @@ export default function Navbar() {
   
   return (
     <>
-      <nav style={{ backgroundImage: 'url("/bg-navbar.png")' }} className='py-1'>
+      <nav style={{ backgroundImage: 'url("/bg-navbar.png")' }} className='py-1 '>
         {/* bg from bg-navbar.png */}
-        <div className="flex justify-end">
+        <div className="flex justify-end mx-52">
           <div className="flex mr-5 text-white items-center">
 
           {cookies().get('Authorization')  ? <LogoutButton/> : <Link href={"/login"} className='mr-2'>Login</Link>}
@@ -21,19 +21,14 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+      
       <div className="flex justify-center">
-        <nav className="flex px-2 mt-8 bg-base-100 w-full h-10 items-center justify-between ">
+        <nav className="flex px-2 mt-10 bg-base-100 w-full h-10 items-center justify-between mx-36">
           <div className="flex ">
-            {/* <a
-        href="/"
-        className="text-xl text-red-500"
-      >
-        HackBen
-      </a> */}
             <img
               src="https://upload.wikimedia.org/wikipedia/id/f/f1/HokBen_new_logo.png"
               alt=""
-              className="h-20 w-20"
+              className="h-24 w-24"
             />
           </div>
           <div className="flex-1 ml-5 ">
@@ -44,7 +39,8 @@ export default function Navbar() {
             >
               Product
             </Link>
-            {cookies().get("Authorization") ? <Link href={"/wishlists"}>Wishlist</Link> : ""}
+            <Link href={"/wishlists"}>Wishlist</Link>
+            {/* {cookies().get("Authorization") ? <Link href={"/wishlists"}>Wishlist</Link> : ""} */}
           </div>
 
           <div className="flex justify-end items-center">

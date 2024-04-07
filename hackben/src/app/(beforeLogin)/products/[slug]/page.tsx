@@ -67,7 +67,7 @@ export default async function ProductDetail({
           <h3>{product?.data.description}</h3>
 
           <div className="flex mt-2">
-            <button className="border-red-600 border btn-block rounded-full px-2 py-2 w-20 mr-5">
+            <button className="border-red-600 border btn-block rounded-full px-2 py-2 mr-5">
               <Link
                 href={"/products"}
                 className="text-red-500  hover:text-black font-bold text-sm"
