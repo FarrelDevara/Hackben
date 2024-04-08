@@ -15,7 +15,7 @@ export default function Product() {
     try {
       if (search) {
         
-        const response = await fetch(process.env.URL + `/api/products?search=${search}`, {
+        const response = await fetch(process.env.NEXT_PUBLIC_URL + `/api/products?search=${search}`, {
         cache: "no-store",
         headers:{
           'Content-Type' : 'application/json'
@@ -26,7 +26,7 @@ export default function Product() {
       setData(newData.data)
       }else{
         
-        const response = await fetch(process.env.URL + `/api/products?page=${pageNumber}&search=${search}`, {
+        const response = await fetch(process.env.NEXT_PUBLIC_URL + `/api/products?page=${pageNumber}&search=${search}`, {
           cache: "no-store",
         });
         const newData = await response.json();

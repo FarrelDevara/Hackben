@@ -12,7 +12,7 @@ export default function Wishlist() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(process.env.URL + `/api/wishlists/`, {
+        const response = await fetch(process.env.NEXT_PUBLIC_URL + "/api/wishlists/", {
           method: "GET",
           cache: "no-store",
           headers:{

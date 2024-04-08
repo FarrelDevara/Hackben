@@ -15,7 +15,7 @@ export default function Login() {
 
     // console.log(rawFormData, "<<<<<<<<<<<<<formdata");
     
-    const response = await fetch(process.env.URL + '/api/users/login',{
+    const response = await fetch(process.env.NEXT_PUBLIC_URL + '/api/users/login',{
       cache: 'no-store',
       method: 'POST',
       headers:{

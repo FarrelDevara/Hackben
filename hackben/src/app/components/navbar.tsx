@@ -1,27 +1,32 @@
-import { cookies } from 'next/headers';
-import Link from 'next/link';
-import { FaCartShopping } from 'react-icons/fa6';
-import { IoPerson } from 'react-icons/io5';
-import LogoutButton from './logoutButton';
+import { cookies } from "next/headers";
+import Link from "next/link";
+import { FaCartShopping } from "react-icons/fa6";
+import { IoPerson } from "react-icons/io5";
+import LogoutButton from "./logoutButton";
+import background from '../../../public/bg-navbar.jpg'
 export default function Navbar() {
-
   // console.log(cookies().get('Authorization'));
-  
+
   return (
     <>
-      <nav style={{ backgroundImage: 'url("/bg-navbar.png")' }} className='py-1 '>
-        {/* bg from bg-navbar.png */}
+      <nav
+        className="py-1 bg-red-500"
+      >
         <div className="flex justify-end mx-52">
           <div className="flex mr-5 text-white items-center">
+            {cookies().get("Authorization") ? (
+              <LogoutButton />
+            ) : (
+              <Link href={"/login"} className="mr-2">
+                Login
+              </Link>
+            )}
 
-          {cookies().get('Authorization')  ? <LogoutButton/> : <Link href={"/login"} className='mr-2'>Login</Link>}
-          
-          <IoPerson className="text-white" />
-
+            <IoPerson className="text-white" />
           </div>
         </div>
       </nav>
-      
+
       <div className="flex justify-center">
         <nav className="flex px-2 mt-10 bg-base-100 w-full h-10 items-center justify-between mx-36">
           <div className="flex ">
@@ -33,10 +38,7 @@ export default function Navbar() {
           </div>
           <div className="flex-1 ml-5 ">
             <Link href={"/"}>Home</Link>
-            <Link
-              href={"/products"}
-              className="mr-4 ml-4"
-            >
+            <Link href={"/products"} className="mr-4 ml-4">
               Product
             </Link>
             <Link href={"/wishlists"}>Wishlist</Link>
@@ -44,14 +46,12 @@ export default function Navbar() {
           </div>
 
           <div className="flex justify-end items-center">
-            <div className="card-actions mr-2">
-              <button className=" bg-red-600 btn-block rounded-full px-4 py-2">
-                <FaCartShopping className=" text-white hover:text-black" />
-              </button>
-            </div>
+            
             <div className="card-actions">
               <button className=" bg-red-600 btn-block rounded-full px-2 py-2 ">
-                <p className="text-white hover:text-black text-semibold text-sm">Order Now</p>
+                <Link href={"/wishlists"} className="text-white hover:text-black text-semibold text-sm">
+                  Order Now
+                </Link>
               </button>
             </div>
           </div>

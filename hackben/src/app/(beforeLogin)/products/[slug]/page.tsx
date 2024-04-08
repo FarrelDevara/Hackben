@@ -29,9 +29,12 @@ export async function generateMetadata(
 
 async function fetchData(slug: string) {
   try {
-    const response = await fetch(process.env.URL + `/api/products/${slug}`, {
-      cache: "no-store",
-    });
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_URL + `/api/products/${slug}`,
+      {
+        cache: "no-store",
+      }
+    );
     const data = await response.json();
     return data;
   } catch (error) {
@@ -44,7 +47,6 @@ export default async function ProductDetail({
 }: {
   params: { slug: string };
 }) {
-
   const product: { data: ProductType } = await fetchData(params.slug);
 
   return (
@@ -64,19 +66,21 @@ export default async function ProductDetail({
           <h1 className="text-red-500 font-bold">
             Rp. {product?.data.price.toLocaleString()}
           </h1>
-          <h3>{product?.data.description}</h3>
+          <h3 className="mt-5">{product?.data.description}</h3>
 
-          <div className="flex mt-2">
-            <button className="border-red-600 border btn-block rounded-full px-2 py-2 mr-5">
-              <Link
-                href={"/products"}
-                className="text-red-500  hover:text-black font-bold text-sm"
-              >
+          <div className="flex items-center text-center mt-5">
+            <Link
+              href={"/products"}
+              className="border-red-600 flex border rounded-full  px-2 py-1 p-10 mr-5"
+            >
+              <p className="text-red-500  hover:text-black font-bold text-sm">
                 Back
-              </Link>
-            </button>
-            <AddWishlistButton productId={product?.data._id}/>
+              </p>
+            </Link>
 
+            <div className="flex">
+              <AddWishlistButton productId={product?.data._id} />
+            </div>
           </div>
         </div>
       </div>
